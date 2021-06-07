@@ -1,7 +1,9 @@
 require 'aspace_logger'
+require 'pp'
 class LabelData
 
   include JSONModel
+  
 
   attr_accessor :labels
 
@@ -60,24 +62,28 @@ class LabelData
     agent_names = []
     # resolve the linked agents
     URIResolver.resolve_references(tc['collection'],['linked_agents'])
-    
     #find the first creator and set the name if there is one
-    agent_ref = tc['collection'][0]['_resolved']['linked_agents'].select{|a| a['role'] == 'creator'}
-    agent_ref.each do |agent|
-      agent_names << agent['_resolved']['title']
+    if tc['collection'].length > 0 && !tc['collection'][0].dig('_resolved','linked_agents').nil?
+      agent_ref = tc['collection'][0]['_resolved']['linked_agents'].select{|a| a['role'] == 'creator'}
+      agent_ref.each do |agent|
+        agent_names << agent['_resolved']['title']
+      end
+      
+      agent_name = agent_names.compact.join("; ")
     end
-    
-    agent_name = agent_names.compact.join("; ")
     
     agent_name
   end
   
   # returns the catalog location for a top container
   def catalog_location_for_top_container(tc)
-    tc_cat_loc = tc['collection'][0]['_resolved']['user_defined'] && tc['collection'][0]['_resolved']['user_defined']['enum_1'] ? tc['collection'][0]['_resolved']['user_defined']['enum_1'] : ''
-    
-    if tc_cat_loc == 'novalue'
-      tc_cat_loc = ''
+    tc_cat_loc = ''
+    if tc['collection'].length > 0 && !tc['collection'][0].dig('_resolved','user_defined').nil?
+      tc_cat_loc = tc['collection'][0]['_resolved']['user_defined'] && tc['collection'][0]['_resolved']['user_defined']['enum_1'] ? tc['collection'][0]['_resolved']['user_defined']['enum_1'] : ''
+      
+      if tc_cat_loc == 'novalue'
+        tc_cat_loc = ''
+      end
     end
     
     tc_cat_loc
