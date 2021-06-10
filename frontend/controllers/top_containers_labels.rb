@@ -14,10 +14,9 @@ class TopContainersLabelsController < TopContainersController
     if response.code =~ /^4/
       return render_aspace_partial :partial => 'top_containers/bulk_operations/error_messages', :locals => {:exceptions => results, :jsonmodel => "top_container"}, :status => 500
     end
-    if params['csv'] == 'true'
-      send_data labels_csv(results, params), filename: "labels_#{Time.now.to_i}.csv"      
-    else
-      render_aspace_partial :partial => "labels/bulk_action_labels", :locals => {:labels => results}
+    respond_to do |format|
+      format.html {render_aspace_partial :partial => "labels/bulk_action_labels", :locals => {:labels => results}}
+      format.csv { send_data labels_csv(results, params), filename: "labels_#{Time.now.to_i}.csv"    }
     end
   end
 

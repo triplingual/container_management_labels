@@ -39,12 +39,20 @@ BulkActionPrintLabels.prototype.show = function() {
  */
 
 function exportCSV() {
-  $form = $("#labels_bulk_action_print_labels");
-  $c = $("#csv");
-  $c.val(true);
- // $form.submit();
+  $form = $("#print_labels_form");
+  action = $form.attr("action");
+  $form.attr("target", "");
+  if (action.indexOf('.csv') === -1) {
+    $form.attr('action', action + '.csv');
+  }
   return true;
-
+}
+function printLabels() {
+  $form = $("#print_labels_form");
+  action = $form.attr("action");
+  $form.attr("action", action.replace('.csv', ''));
+  $form.attr("target", "_blank");
+  return true;
 }
 
 /***************************************************************************

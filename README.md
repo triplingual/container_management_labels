@@ -18,6 +18,10 @@ It supports two label sizes on install:
 Some local customization will be required to add additional label types and orientations. Additional css customizations may be necessary for
 local browser and printer combinations.
 
+## (Yale extension)
+
+This plugin now supports the export of a CSV (Comma Separated Values) file, based on the fields selected by the user.  The addition of an 'Export CSV' button on the user form enables the user to switch between printing labels and exporting the CSV from the same screen.
+
 ## Installing
 
 To install, just activate the plugin in your config.rb file by
