@@ -33,6 +33,19 @@ BulkActionPrintLabels.prototype.show = function() {
 
   var $modal = AS.openCustomModal("bulkActionModal", this.$menuItem[0].text, dialog_content, 'full');
 };
+/***************************************************************************
+ * Support for exporting CSVs
+ *
+ */
+
+function exportCSV() {
+  $form = $("#labels_bulk_action_print_labels");
+  $c = $("#csv");
+  $c.val(true);
+ // $form.submit();
+  return true;
+
+}
 
 /***************************************************************************
  * Initialise the label printing as a child of the BulkContainerSearch class

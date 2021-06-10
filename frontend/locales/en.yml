@@ -19,6 +19,7 @@ en:
         print_labels: Print Labels
         print_labels_help: "Print labels for these containers:"
         print_n_labels: "Print labels for %{n} containers"
+        cvs_n_labels: "Export CVS for %{n} containers"
         label_page_title: ArchivesSpace Container Labels
       fields:
         agent_name: Creator
