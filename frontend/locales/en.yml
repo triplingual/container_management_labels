@@ -16,10 +16,10 @@ en:
         barcode_type_datamatrix: DataMatrix
       bulk_operations:
         indicator_search_hint: Space separated list or a *numerical* range like this [1 TO 10]
-        print_labels: Print Labels
-        print_labels_help: "Print labels for these containers:"
+        print_labels: Generate Labels
+        print_labels_help: "Generate labels for these containers:"
         print_n_labels: "Print labels for %{n} containers"
-        cvs_n_labels: "Export CVS for %{n} containers"
+        cvs_n_labels: "Export CSV for %{n} containers"
         label_page_title: ArchivesSpace Container Labels
       fields:
         agent_name: Creator
