@@ -18,9 +18,7 @@ It supports two label sizes on install:
 Some local customization will be required to add additional label types and orientations. Additional css customizations may be necessary for
 local browser and printer combinations.
 
-## (Yale extension)
-
-This plugin now supports the export of a CSV (Comma Separated Values) file, based on the fields selected by the user.  The addition of an 'Export CSV' button on the user form enables the user to switch between printing labels and exporting the CSV from the same screen.
+This plugin optionally supports the export of a CSV (Comma Separated Values) file, based on the fields selected by the user.  The addition of an 'Export CSV' button on the user form enables the user to switch between printing labels and exporting the CSV from the same screen.
 
 ## Installing
 
@@ -51,6 +49,8 @@ additional fields are set in the model (`backend/model/label_data.rb`)
     resource_id
     resource_title
     agent_name
+    series_id
+    series_display
     type
     indicator
     barcode
@@ -79,6 +79,9 @@ config file does not contain the `:container_management_labels` key.
             "checked" => true,
             "disabled" => false}},
         {"series_id" => {
+            "checked" => false,
+            "disabled" => false}},
+        {"series_display" => {
             "checked" => false,
             "disabled" => false}},
         {"type" => {
@@ -125,6 +128,11 @@ per use basis.
       "checked" => true,
       "disabled" => false
     }
+
+#### Exporting labels as a CSV file
+The addition of an **Export CSV** button allows the user to create a CSV file whose columns reflect the checked selections.  To enable this feature:
+
+    AppConfig[:container_management_labels_csv] = true
 
 #### Printing Files (and other sub container labels) can also be turned on or off from the config file.
 Allows the user to print files (or other subcontainer labels). This will print labels for all
@@ -176,7 +184,8 @@ The labels will display the following fields
     Resource ID (a concatenated list of all resource ids associated with the top container)
     Resource Title (a concatenated list of all resource titles associated with the top container)
     Agent Name (a concatenated list of all creators associated with the top container's associated resource)
-    Series ID (a concatenated list of all series associated with the top container)
+    Series ID (a concatenated list of IDs of all series associated with the top container)
+    Series Display (a concatenated list of display/names of all series associated with the top container)
     Top Container Indicator
     Top Container Barcode
     Location Title
@@ -205,3 +214,4 @@ The following barcode types are available - codabar is the default type:
     datamatrix (DataMatrix, ASCII + extended - alpha-numeric, 2D for small, high density use)
 
 Note that the use of the datamatrix type barcode will most likely require some reworking of the css.
+
