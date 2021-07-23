@@ -29,6 +29,7 @@ class LabelData
       area, location, location_barcode = location_for_top_container(tc)
       resource_id, resource_title = resource_for_top_container(tc)
       institution, repository = institution_repo_for_top_container(tc)
+      series_id, series_display = series_for_top_container(tc)
 
       labels << tc.merge({
                   "agent_name" => agent,
@@ -39,6 +40,8 @@ class LabelData
                   "resource_title" => resource_title,
                   "institution_name" => institution,
                   "repository_name" => repository,
+                  "series_id" => series_id,
+                  "series_display" => series_display,
                   })
     end
     
@@ -64,6 +67,7 @@ class LabelData
       area, location, location_barcode = location_for_top_container(tc)
       resource_id, resource_title = resource_for_top_container(tc)
       institution, repository = institution_repo_for_top_container(tc)
+      series_id, series_display = series_for_top_container(tc)
       
       # if there's an indicator2, then its a sub_container like a file so add it to the sub_container labels
       unless top_container_to_ao_links[top_container_id].nil?
@@ -108,6 +112,8 @@ class LabelData
                       "resource_title" => resource_title,
                       "institution_name" => institution,
                       "repository_name" => repository,
+                      "series_id" => series_id,
+                      "series_display" => series_display,
                       })
         end
       end
@@ -170,6 +176,21 @@ class LabelData
     return resource_id, resource_title
   end
   
+  # returns 2 semicolon concatenated strings: IDs and  display
+  def series_for_top_container(tc)
+    series_ids = []
+    series_displays = []
+    series = tc['series'].empty? ? {} : tc['series']
+    series.each do |ser|
+      series_ids << ser['identifier']
+      series_displays << ser['display_string']
+    end
+    series_id = series_ids.compact.join("; ")
+    series_display = series_displays.compact.join("; ")
+    return series_id, series_display
+  end
+
+
   def institution_repo_for_top_container(tc)
     institution =  tc['repository']['_resolved']['parent_institution_name'] ? tc['repository']['_resolved']['parent_institution_name'] : ''
     repository = tc['repository']['_resolved']['name']

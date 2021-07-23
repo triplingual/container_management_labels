@@ -41,6 +41,7 @@ en:
         resource_id: Resource/Accession Identifier
         resource_title: Resource/Accession Title
         series_id: Series Identifier
+        series_display: Series Display
         type: Container Type
       labels:
         label_type_label: Label Type
