@@ -61,7 +61,7 @@
               </p>
             </div>
           <% end %>
-          <% if AppConfig[:container_management_labels_print_files] %>
+          <% if !AppConfig[:container_management_labels_print_files].empty? %>
             <div class="col-sm-12">
               <h4><%= I18n.t("top_container_labels._frontend.fields.print_files") %></h4>
               <p><%= I18n.t("top_container_labels._frontend.fields.print_files_message") %>
