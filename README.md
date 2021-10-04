@@ -161,11 +161,14 @@ To set it to print file level labels only:
 
 If more than one series is included in a container, the default delimiter between IDs and Displays is **'; '**.  So, if a container had Series 1 and Series 3 in it, the series ID field would be represented as **'1; 3'**.  
 To change this delimeter, set the AppConfig[:container_management_labels_delim] to you desired delimiter, e.g.:
+
      AppConfig[:container_management_labels_delim] = ', '
 
 #### Prepending a label to the Series ID
 If the container includes only one series, you can specify a label in AppConfig[:container_management_labels_series] to prepend to the series ID string; the default is no label.  For example, if you set
+
      AppConfig[:container_management_labels_series] = 'Series '
+
  you will see the series ID string as **'Series 1'**
     
 ### /frontend/assets/container_labels.css
