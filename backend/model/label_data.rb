@@ -14,7 +14,8 @@ class LabelData
   end
 
   def build_label_data
-
+    @tag = AppConfig.has_key?(:container_management_labels_series)? AppConfig[:container_management_labels_series] : ''
+    @delim = AppConfig.has_key?(:container_management_labels_delim)? AppConfig[:container_management_labels_delim] : '; '
     ids = @uris.map {|uri| JSONModel(:top_container).id_for(uri)}
     
     # Eagerly load all of the Top Containers we'll be working with
@@ -185,8 +186,11 @@ class LabelData
       series_ids << ser['identifier']
       series_displays << ser['display_string']
     end
-    series_id = series_ids.compact.join("; ")
-    series_display = series_displays.compact.join("; ")
+    series_id = series_ids.compact.join(@delim)
+    if series_ids.length == 1
+      series_id = @tag + series_id
+    end
+    series_display = series_displays.compact.join(@delim)
     return series_id, series_display
   end
 

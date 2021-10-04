@@ -29,12 +29,7 @@ class TopContainersLabelsController < TopContainersController
     super
   end
 end
-# path = 't.csv'
-# CSV.open(path, 'w', headers: ['Name', 'Value'], write_headers: true) do |csv|
-#   csv << ['Foo', 0]
-#   csv << ['Bar', 1]
-#   csv << ['Baz', 2]
-# end
+
 # add in the indicator range search
 def labels_csv(results, params)
   #Get the possible fields 
