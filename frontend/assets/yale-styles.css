@@ -1,0 +1,53 @@
+div {
+	font-family: "Arial Unicode", Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+div.label .institution_name, div.label .repository_name {
+	color: #333;
+	font-style: normal;
+	font-size: 80%;
+	font-weight: 800;
+}
+
+div.label .resource_title {
+	margin-top: 1em;
+	text-transform: uppercase;
+}
+
+div.label .series_id {
+	font-weight: 800;
+	text-transform: uppercase;
+}
+
+div.label .series_display {
+	font-weight: normal !important;
+}
+
+div.label .resource_id {
+	background-color: #fff;
+	border: none;
+	color: #000;
+	margin-top: 20px;
+	font-weight: 800;
+	font-size: 100%;
+}
+
+div.label .agent_name {
+	font-weight: 800;
+}
+
+div.label .type {
+	background-color: #fff;
+	border-bottom: none;
+	color: #000;
+	font-size: 100%;
+	font-weight: 800;
+	padding: 2px 0;
+}
+
+div.label .indicator {
+	background-color: #fff;
+	font-size: 100%;
+	color: #000;
+	font-weight: 800;
+}
