@@ -1,16 +1,45 @@
+#
+# NOT AT ALL SURE IF THIS IS HOW TO DO IT
+#
+#
+# Load Romanizer (to convert series numbers from Arabic [well-actually-Hindi] to Roman)
+romanize_lib = ASUtils.find_local_directories('public/models/romanize_series_identifier.rb',
+                                              'aspace_yale_pui').first
+
+if File.exist?(romanize_lib)
+  load romanize_lib
+else
+  raise "yale_series_title needs the aspace_yale_pui to be loaded first.  File could not be found: #{romanize_lib}"
+end
+
 require 'aspace_logger'
 require 'pp'
 class LabelData
 
   include JSONModel
   
-
   attr_accessor :labels, :sub_labels
 
   def initialize(uris)
     @uris = uris
     @labels = build_label_data
     @sub_labels = build_subcontainer_data
+  end
+
+  def romanize_this(series_identifier)
+    if series_identifier =~ /\A(Series )?([0-9]+)\z/
+      series_identifier_transformed = Romanizer.romanize(Integer($2))
+    else
+      series_identifier_transformed = series_identifier
+    end
+
+    # Our component ID may have contained the word "Series", but if it
+    # didn't, add it in.
+    unless series_identifier_transformed.start_with?('Series ')
+     series_identifier_transformed = "Series #{series_label}"
+    end
+
+    return series_identifier_transformed
   end
 
   def build_label_data
@@ -183,7 +212,7 @@ class LabelData
     series_displays = []
     series = tc['series'].empty? ? {} : tc['series']
     series.each do |ser|
-      series_ids << ser['identifier']
+      series_ids << romanize_this(ser['identifier'])
       series_displays << ser['display_string']
     end
     series_id = series_ids.compact.join(@delim)
