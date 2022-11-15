@@ -271,5 +271,9 @@ class LabelData
 
     result
   end
+  
+  class Romanizer
+    extend RomanizeSeriesIdentifier
+  end
 
 end
