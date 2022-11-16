@@ -36,7 +36,7 @@ class LabelData
     # Our component ID may have contained the word "Series", but if it
     # didn't, add it in.
     unless series_identifier_transformed.start_with?('Series ')
-     series_identifier_transformed = "Series #{series_label}"
+     series_identifier_transformed = "Series #{series_identifier_transformed}"
     end
 
     return series_identifier_transformed
