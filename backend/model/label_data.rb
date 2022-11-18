@@ -1,7 +1,3 @@
-#
-# NOT AT ALL SURE IF THIS IS HOW TO DO IT
-#
-#
 # Load Romanizer (to convert series numbers from Arabic [well-actually-Hindi] to Roman)
 romanize_lib = ASUtils.find_local_directories('public/models/romanize_series_identifier.rb',
                                               'aspace_yale_pui').first
@@ -9,7 +5,7 @@ romanize_lib = ASUtils.find_local_directories('public/models/romanize_series_ide
 if File.exist?(romanize_lib)
   load romanize_lib
 else
-  raise "yale_series_title needs the aspace_yale_pui to be loaded first.  File could not be found: #{romanize_lib}"
+  raise "container_management_labels needs the aspace_yale_pui to be loaded first.  File could not be found: #{romanize_lib}"
 end
 
 require 'aspace_logger'
