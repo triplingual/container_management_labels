@@ -22,7 +22,7 @@ class LabelData
     @sub_labels = build_subcontainer_data
   end
 
-  def romanize_this(series_identifier)
+  def romanize_series_id(series_identifier)
     if series_identifier =~ /\A(Series )?([0-9]+)\z/
       series_identifier_transformed = Romanizer.romanize(Integer($2))
     else
@@ -208,7 +208,7 @@ class LabelData
     series_displays = []
     series = tc['series'].empty? ? {} : tc['series']
     series.each do |ser|
-      series_ids << romanize_this(ser['identifier'])
+      series_ids << romanize_series_id(ser['identifier'])
       series_displays << ser['display_string']
     end
     series_id = series_ids.compact.join(@delim)
