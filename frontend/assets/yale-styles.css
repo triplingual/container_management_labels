@@ -51,3 +51,47 @@ div.label .indicator {
 	color: #000;
 	font-weight: 800;
 }
+
+/* Avery 5164 is Yale standard: 2"x4" with 
+	10 labels per sheet in portrait mode */
+.avery-5164{
+    height: 3.333in;
+    width: 3.875in;
+}
+.avery-5164:nth-of-type(2n){
+    float: right;
+    padding-left: 0.125in;
+}
+.avery-5164:nth-of-type(2n+1){
+    clear: left;
+    float: left;
+    padding-right: 0.125in;
+}
+@media print{
+    /*************************************************************
+        Set when the page breaks should occur for each label type. 
+
+        Note also that different browsers scale the printing differently
+        despite what *should* happen.
+     *************************************************************/
+    /********** avery 5164 **********/
+    .avery-5164:nth-of-type(6){
+        page-break-after: always;
+    }
+    /*************************************************************** 
+        safari does some wierd scaling things
+        adjust for that and then reset chrome
+    ****************************************************************/
+    .avery-5164.safari-label{
+        width: 3.6in !important;
+        height: 3.16in !important;
+    }
+    .avery-5164.chrome-label{
+        width: 3.875in !important;
+        height: 3.333in !important;
+    }
+    /* tell chrome to behave about page breaks */
+    .avery-5164.chrome-label:nth-of-type(6){
+        page-break-after: auto;
+    }
+}
