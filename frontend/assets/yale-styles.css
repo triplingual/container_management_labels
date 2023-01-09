@@ -52,10 +52,11 @@ div.label .indicator {
 	font-weight: 800;
 }
 
-/* Avery 5164 is Yale standard: 2"x4" with 
-	10 labels per sheet in portrait mode */
+/* Avery 5164 is Yale standard: 3-1/3"x4" with 
+	10 labels per sheet in portrait mode. 
+	Height set to what fit on the template downloaded from Avery, though. */
 .avery-5164{
-    height: 3.333in;
+    height: 3.2in;
     width: 3.875in;
 }
 .avery-5164:nth-of-type(2n){
@@ -88,7 +89,7 @@ div.label .indicator {
     }
     .avery-5164.chrome-label{
         width: 3.875in !important;
-        height: 3.333in !important;
+        height: 3.2in !important;
     }
     /* tell chrome to behave about page breaks */
     .avery-5164.chrome-label:nth-of-type(6){
